@@ -1,0 +1,34 @@
+.title {
+    max-width: 50%;
+}
+
+.cover-image {
+    margin-top: 20px;
+    display: block;
+}
+
+.book {
+    border-top: 1px solid #ccc;
+    margin-bottom: 20px;
+}
+
+.book:hover {
+    background-color: #eee;
+}
+
+.rating em {
+    font-size: 0.9em;
+    color: #ccc;
+}
+
+#your-books {
+    width: 100%;
+}
+
+.your-books-container {
+    margin-bottom: 20px;
+}
+
+.add-to-list {
+    margin-top: 10px;
+}
