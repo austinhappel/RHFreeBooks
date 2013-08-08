@@ -13,7 +13,7 @@ import pystache
 CWD = os.getcwd()
 template = open(os.path.join(CWD, 'templates/index.html')).read()
 outputFile = open(os.path.join(CWD, 'index.html'), 'w')
-# wb = load_workbook('Free book offering August 2013.xlsx')
+wb = load_workbook('../Free book offering August 2013.xlsx')
 wb = load_workbook('test.xlsx')
 ws = wb.get_active_sheet()
 isbn_numbers = [isbn.value for isbn in ws.columns[0]][1:]
