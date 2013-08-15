@@ -10,6 +10,7 @@
 .book {
     border-top: 1px solid #ccc;
     margin-bottom: 20px;
+    position: relative;
 }
 
 .book:hover {
@@ -31,4 +32,11 @@
 
 .add-to-list {
     margin-top: 10px;
+}
+
+.format-label {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 1.5em;
 }
