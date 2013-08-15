@@ -54,11 +54,12 @@
             var $form = $('#your-books');
             $('.add-to-list').on('click', function (e) {
                 var $target = $(e.target).parents('.book').eq(0),
-                    oldContent = $form.html(),
+                    oldContent = $form.val(),
                     bookTitle = $target.find('.title a').eq(0).html(),
                     bookISBN = $target.find('.isbn').eq(0).html(),
                     newItem = 'Title: ' + bookTitle + '\n' + bookISBN + '\n\n';
-                $form.html(oldContent + newItem);
+
+                $form.val(oldContent + newItem);
             });
             $('.title a').on('click', function (e) {
                 e.preventDefault();
