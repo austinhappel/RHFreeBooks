@@ -18,7 +18,8 @@ wb = load_workbook('test.xlsx')
 ws = wb.get_active_sheet()
 isbn_numbers = [isbn.value for isbn in ws.columns[0]][1:]
 titles = [title.value for title in ws.columns[1]][1:]
-
+format = [format.value for format in ws.columns[5]][1:]
+filter_format_options = []
 book_data = []
 
 for idx, isbn in enumerate(isbn_numbers):
@@ -35,6 +36,11 @@ for idx, isbn in enumerate(isbn_numbers):
     book = xml.find('book')
     book_details['title'] = titles[idx]
     book_details['isbn'] = isbn
+    book_details['format'] = format[idx]
+
+    if format[idx] not in filter_format_options:
+        filter_format_options.append(format[idx])
+
     book_details['cover_image'] = book.find('image_url').text
     book_details['rating'] = book.find('average_rating').text
     book_details['ratings_count'] = book.find('ratings_count').text
@@ -47,7 +53,8 @@ for idx, isbn in enumerate(isbn_numbers):
     print json.dumps(book_data, indent=4)
 
 context = {
-    'books': book_data
+    'books': book_data,
+    'filter_format_options': filter_format_options
 }
 
 outputFile.write(pystache.render(template, context).encode('utf-8'))

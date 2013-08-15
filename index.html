@@ -12,7 +12,20 @@
         <div class="row">
             <div class="col-7">
                 <h1>RH free books summer 2013</h1>
-                <p>Reviews and description from goodreads.com</p>  
+                <p>Reviews and description from goodreads.com</p>
+                <form class="form-horizontal">
+                    <div class="control-group">
+                        <label class="control-label" for="filter-by-format">Filter by format: </label>
+                        <div class="controls">
+                          <select id="filter-by-format">
+                              <option>all</option>
+                                  <option>Trade Paperback</option>
+                                  <option>Hardcover</option>
+                          </select>
+                        </div>
+                    </div>
+                    
+                </form>
             </div>
             <div class="col-5 your-books-container">
                 <h2>Your books</h2>
@@ -22,6 +35,9 @@
         <div class="row">
             <div class="col-12 book">
                 <h3 class="title"><a href="http://www.goodreads.com/book/show/16085532-stan-lee-s-how-to-draw-superheroes" >Stan Lee's How to Draw Superheroes</a></h3>
+                <div class="format-label">
+                    <span class="label label-info">Trade Paperback</span>
+                </div>
                 <h4 class="author">
                     By
                         Stan Lee <br/>
@@ -42,6 +58,9 @@
             </div>
             <div class="col-12 book">
                 <h3 class="title"><a href="http://www.goodreads.com/book/show/16099165-christopher-hart-s-draw-manga-now-top-ten-essentials" >Top Ten Essentials: Christopher Hart's Draw Manga Now!</a></h3>
+                <div class="format-label">
+                    <span class="label label-info">Trade Paperback</span>
+                </div>
                 <h4 class="author">
                     By
                         Christopher Hart <br/>
@@ -62,6 +81,9 @@
             </div>
             <div class="col-12 book">
                 <h3 class="title"><a href="http://www.goodreads.com/book/show/15823454-pastel-painting-atelier" >Pastel Painting Atelier</a></h3>
+                <div class="format-label">
+                    <span class="label label-info">Hardcover</span>
+                </div>
                 <h4 class="author">
                     By
                         Ellen Eagle <br/>
@@ -82,6 +104,9 @@
             </div>
             <div class="col-12 book">
                 <h3 class="title"><a href="http://www.goodreads.com/book/show/15823444-bad-boy" >Bad Boy</a></h3>
+                <div class="format-label">
+                    <span class="label label-info">Hardcover</span>
+                </div>
                 <h4 class="author">
                     By
                         Eric Fischl <br/>
@@ -104,7 +129,8 @@
     </div>
     
     <!-- JavaScript plugins (requires jQuery) -->
-    <script src="http://code.jquery.com/jquery.js"></script>
+    <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
+    <script type="text/javascript" src="static/js/bootstrap.min.js"></script>
     <script type="text/javascript">
         $(document).ready(function () {
             var $form = $('#your-books');
@@ -113,14 +139,33 @@
                     oldContent = $form.val(),
                     bookTitle = $target.find('.title a').eq(0).html(),
                     bookISBN = $target.find('.isbn').eq(0).html(),
-                    newItem = 'Title: ' + bookTitle + '\n' + bookISBN + '\n\n';
-                console.log(oldContent);
-                console.log($form.val());
+                    newItem = bookTitle + '\n' + bookISBN + '\n\n';
+                
                 $form.val(oldContent + newItem);
             });
+
             $('.title a').on('click', function (e) {
                 e.preventDefault();
                 window.open($(e.target).attr('href'));
+            });
+
+            // filter
+            $('#filter-by-format').on('change', function (e) { 
+                var selectedOption = $('#filter-by-format').find(":selected").text();
+
+                if (selectedOption === 'all') {
+                    $('.book').show();
+                } else {
+                    $('.book').each(function () {
+                        var $this = $(this);
+
+                        if ($this.find('.format-label span').text() !== selectedOption) {
+                            $this.hide();
+                        } else {
+                            $this.show();
+                        }
+                    });    
+                }
             });
         });
     </script>
