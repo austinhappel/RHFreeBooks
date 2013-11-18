@@ -4318,7 +4318,7 @@
             var $form = $('#your-books');
             $('.add-to-list').on('click', function (e) {
                 var $target = $(e.target).parents('.book').eq(0),
-                    oldContent = _.without($form.val().split('\n\n'), '') || [],
+                    oldContent = _.without($form.val().split('\n'), '') || [],
                     // prefixing the user's title selection with a book count.
                     // EL is electornic ebook, which we get unlimited books, so those don't count.
                     bookCount = (function () {
@@ -4338,7 +4338,7 @@
                     bookTitle = $target.find('.title a').eq(0).html(),
                     bookISBN = $target.find('.isbn').eq(0).html().substr(6),
                     prefix = $target.find('.format-label .label-info').eq(0).html() === 'EL' ? 'eBook' : bookCount,
-                    newItem = prefix + ' ' + bookTitle + '    ' + bookISBN + '\n\n',
+                    newItem = prefix + '    ' + bookTitle + '    ' + bookISBN + '\n\n',
                     newContent = oldContent;
                 
                 newContent.push(newItem);
@@ -4357,7 +4357,7 @@
                     return a.substr(0, 2) - b.substr(0, 2);
                 });
                 // update form
-                $form.val(newContent.join('\n\n'));
+                $form.val(newContent.join('\n'));
             });
 
             $('.title a').on('click', function (e) {
